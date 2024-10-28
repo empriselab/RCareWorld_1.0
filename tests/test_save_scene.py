@@ -24,4 +24,7 @@ def test_save_scene():
   env.SaveScene("helpme.json")
   env.ClearScene()
 
+  current_dir = os.getcwd()
+  print(f"Current working directory: {current_dir}")
+  assert os.path.exists("template/Bathing/BathingPlayer_Data")
   assert os.path.exists("template/Bathing/BathingPlayer_Data/StreamingAssets/SceneData/helpme.json")
