@@ -23,6 +23,9 @@ def test_save_scene():
 
   env.SaveScene("helpme.json")
   env.ClearScene()
+  
+  # Wait for file to write...
+  env.step(50)
 
   current_dir = os.getcwd()
   print(f"Current working directory: {current_dir}")
