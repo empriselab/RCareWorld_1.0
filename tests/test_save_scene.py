@@ -25,8 +25,8 @@ def test_save_scene():
   env.ClearScene()
   
   # Wait for file to write...
-  env.LoadSceneAsync("helpme.json", auto_wait=True)
-  env.close()
+  for _ in range(300):
+    env.step()
 
   current_dir = os.getcwd()
   print(f"Current working directory: {current_dir}")
