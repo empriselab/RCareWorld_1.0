@@ -1,3 +1,7 @@
+name: CI Checks
+
+on: [pull_request]
+
 jobs:
   unit-tests:
     name: Unit Tests
@@ -19,7 +23,6 @@ jobs:
           conda install numpy
           cd ../
 
-         
 
       # # Run each test file individually
       # - name: Run test_angle_functions.py
