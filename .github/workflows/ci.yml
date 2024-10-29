@@ -15,13 +15,18 @@ jobs:
         with:
           activate-environment: rcareworld
           python-version: "3.10"
-      - run: |
+      - name: Install dependencies
+        run: |
           cd pyrcareworld
           pip install -r requirements.txt
           pip install -e .
           pip uninstall -y numpy
           conda install numpy
           cd ../
+      - name: Run angle function tests
+        run: |
+          cd pyrcareworld
+          pytest tests/test_angle_functions.py
 
 
       # # Run each test file individually
