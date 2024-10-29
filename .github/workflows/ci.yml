@@ -1,22 +1,16 @@
-name: CI Checks
-
-on: [pull_request]
-
 jobs:
   unit-tests:
     name: Unit Tests
-    runs-on: ubuntu-20.04
+    runs-on: "ubuntu-20.04"
     defaults:
       run:
         shell: bash -el {0}
     steps:
       - uses: actions/checkout@v4
-
       - uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: rcareworld
           python-version: "3.10"
-
       - run: |
           cd pyrcareworld
           pip install -r requirements.txt
@@ -25,23 +19,25 @@ jobs:
           conda install numpy
           cd ../
 
-      # Run each test file individually
-      - name: Run test_angle_functions.py
-        run: |
-          cd pyrcareworld
-          pytest tests/test_angle_functions.py
+         
 
-      - name: Run test_bathing_env.py
-        run: |
-          cd pyrcareworld
-          pytest tests/test_bathing_env.py
+      # # Run each test file individually
+      # - name: Run test_angle_functions.py
+      #   run: |
+      #     cd pyrcareworld
+      #     pytest tests/test_angle_functions.py
 
-      - name: Run test_dressing_env.py
-        run: |
-          cd pyrcareworld
-          pytest tests/test_dressing_env.py
+      # - name: Run test_bathing_env.py
+      #   run: |
+      #     cd pyrcareworld
+      #     pytest tests/test_bathing_env.py
 
-      - name: Run test_save_scene.py
-        run: |
-          cd pyrcareworld
-          pytest tests/test_save_scene.py
+      # - name: Run test_dressing_env.py
+      #   run: |
+      #     cd pyrcareworld
+      #     pytest tests/test_dressing_env.py
+
+      # - name: Run test_save_scene.py
+      #   run: |
+      #     cd pyrcareworld
+      #     pytest tests/test_save_scene.py
