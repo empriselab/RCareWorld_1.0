@@ -23,19 +23,10 @@ jobs:
           pip uninstall -y numpy
           conda install numpy
           cd ../
+
+      - name: Run unit tests
+        run: |
           pytest tests/test_angle_functions.py
           pytest tests/test_dressing_env.py
           pytest tests/test_save_scene.py
-
-      #     cd pyrcareworld
-      #     pytest tests/test_bathing_env.py
-
-      # - name: Run test_dressing_env.py
-      #   run: |
-      #     cd pyrcareworld
-      #     pytest tests/test_dressing_env.py
-
-      # - name: Run test_save_scene.py
-      #   run: |
-      #     cd pyrcareworld
-      #     pytest tests/test_save_scene.py
+          pytest tests/test_bathing_env.py
