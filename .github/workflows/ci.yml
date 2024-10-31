@@ -12,7 +12,17 @@ jobs:
       run:
         shell: bash -el {0}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout RCareWorld repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true 
+
+      - name: Set up Git LFS
+        run: git lfs install
+
+      - name: Pull LFS Files
+        run: git lfs pull
+
       - uses: conda-incubator/setup-miniconda@v3
         with:
           activate-environment: rcareworld
