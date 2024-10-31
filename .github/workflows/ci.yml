@@ -28,6 +28,6 @@ jobs:
         run: |
           pytest tests/test_angle_functions.py
           pytest tests/test_dressing_env.py
-          pytest tests/test_bathing_env.py
+          pytest -s tests/test_bathing_env.py
           pytest tests/test_save_scene.py
           
