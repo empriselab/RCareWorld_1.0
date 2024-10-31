@@ -6,6 +6,8 @@ jobs:
   unit-tests:
     name: Unit Tests
     runs-on: "ubuntu-20.04"
+    env:
+      PYTHONUNBUFFERED: 1
     defaults:
       run:
         shell: bash -el {0}
@@ -26,9 +28,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          pytest tests/test_angle_functions.py
-          pytest tests/test_dressing_env.py
-          pytest -s tests/test_save_scene.py
-          pytest -s tests/test_bathing_env.py
-          
-          
+          echo "::group::Running tests"
+          pytest --capture=tee-sys tests/
+          echo "::endgroup::"
+            
