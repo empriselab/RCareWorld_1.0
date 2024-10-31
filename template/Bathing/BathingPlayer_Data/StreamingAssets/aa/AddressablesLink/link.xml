@@ -31,6 +31,7 @@
     <type fullname="GelSlimAttr" preserve="all" />
     <type fullname="GelSlimCollider" preserve="all" />
     <type fullname="IgnoreSelfCollision" preserve="all" />
+    <type fullname="RCareWorld.Attributes.ColliderAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.ControllerAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.Digit.GelSlimTarget" preserve="all" />
     <type fullname="RCareWorld.Attributes.HumanArticulationAttr" preserve="all" />
@@ -88,6 +89,7 @@
     <type fullname="UnityEngine.CapsuleCollider" preserve="all" />
     <type fullname="UnityEngine.MeshCollider" preserve="all" />
     <type fullname="UnityEngine.Rigidbody" preserve="all" />
+    <type fullname="UnityEngine.SphereCollider" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.UI.CanvasScaler" preserve="all" />
