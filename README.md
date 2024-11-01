@@ -49,6 +49,11 @@ conda create -n rcareworld python=3.10
 # Activate the conda environment 
 conda activate rcareworld
 
+# Download the large files
+cd RCareWorld
+git lfs install
+git lfs pull
+
 # Install the requirements
 cd RCareWorld/pyrcareworld
 pip install -r requirements.txt
