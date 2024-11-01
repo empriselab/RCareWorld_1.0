@@ -7,9 +7,9 @@ from pyrcareworld.envs.dressing_env import DressingEnv
 import os
 import sys
 
-def test_save_scene():
+def test_save_dressing():
   # Initialize the environment with the specified scene file
-  env = DressingEnv(assets=["Collider_Box", "Rigidbody_Sphere"], graphics=False)
+  env = DressingEnv(assets=["Collider_Box", "Rigidbody_Sphere"], graphics=False, log_level=1)
 
   box1 = env.InstanceObject(name="Collider_Box", attr_type=attr.ColliderAttr)
   box1.SetTransform(position=[-0.5, 0.5, 0], scale=[0.1, 1, 1])
@@ -32,7 +32,8 @@ def test_save_scene():
   assert os.path.exists("template/Dressing/DressingPlayer_Data")
   assert os.path.exists("template/Dressing/DressingPlayer_Data/StreamingAssets/SceneData/helpme.json")
 
-  env = BathingEnv(assets=["Collider_Box", "Rigidbody_Sphere"], graphics=False)
+def test_save_bathing():
+  env = BathingEnv(assets=["Collider_Box", "Rigidbody_Sphere"], graphics=False, log_level=1)
 
   box1 = env.InstanceObject(name="Collider_Box", attr_type=attr.ColliderAttr)
   box1.SetTransform(position=[-0.5, 0.5, 0], scale=[0.1, 1, 1])
@@ -46,7 +47,11 @@ def test_save_scene():
   sphere.SetTransform(position=[0, 0.5, 0], scale=[0.5, 0.5, 0.5])
   env.step(1)
   env.SaveScene("helpme.json")
-  env.step(1)
+
+  # Give some time to save...
+  for _ in range(10):
+    env.step()
+
   env.close()
 
   current_dir = os.getcwd()
