@@ -15,7 +15,7 @@ from .test_angle_functions import euler_angles_allclose
 def _bathing_env_fixture():
     """Create a BathingEnv once and share it across tests."""
     # NOTE: set graphics = True here to debug.
-    env = BathingEnv(graphics=False)    
+    env = BathingEnv(graphics=False, log_level=1)    
     yield env
     env.close()
 

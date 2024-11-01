@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import argparse
 
-def _main(use_graphics=False):
+def _main(use_graphics=False, dev=None):
     if use_graphics:
         text = """
         An example of the usage of the bathing environment.
@@ -23,7 +23,7 @@ def _main(use_graphics=False):
 
         print(text) 
     # Initialize the environment
-    env = BathingEnv(graphics=use_graphics)
+    env = BathingEnv(graphics=use_graphics) if dev == None else BathingEnv(graphics=use_graphics, executable_file="@editor")
     print(env.attrs)
 
     robot = env.get_robot()
@@ -132,5 +132,6 @@ def _main(use_graphics=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run RCareWorld bathing environment simulation.')
     parser.add_argument('-g', '--graphics', action='store_true', help='Enable graphics')
+    parser.add_argument('-d', '--dev', action='store_true', help='Run in developer mode')
     args = parser.parse_args()
-    _main(use_graphics=args.graphics)
+    _main(use_graphics=args.graphics, dev=args.dev)

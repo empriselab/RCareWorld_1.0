@@ -26,12 +26,6 @@ def test_save_scene():
   env.SaveScene("helpme.json")
   env.step(1)
   env.close()
-  # env.ClearScene()
-  # env.Pend()
-  
-  # Wait for file to write...
-  # for _ in range(300):
-  #   env.step()
 
   current_dir = os.getcwd()
   print(f"Current working directory: {current_dir}")
@@ -50,17 +44,10 @@ def test_save_scene():
   box4.SetTransform(position=[0, 0.5, -0.5], scale=[1, 1, 0.1])
   sphere = env.InstanceObject(name="Rigidbody_Sphere", attr_type=attr.RigidbodyAttr)
   sphere.SetTransform(position=[0, 0.5, 0], scale=[0.5, 0.5, 0.5])
-  # env.ClearScene()
   env.step(1)
   env.SaveScene("helpme.json")
   env.step(1)
   env.close()
-  # env.ClearScene()
-  # env.Pend()
-  
-  # Wait for file to write...
-  # for _ in range(300):
-  #   env.step()
 
   current_dir = os.getcwd()
   print(f"Current working directory: {current_dir}")
