@@ -5,6 +5,20 @@ class SpongeAttr(attr.BaseAttr):
     Sponge attribute class to interact with the sponge in the Unity environment.
     """
 
+    def __init__(self, env, id: int, data: dict = {}):
+        """
+        Initialize the SpongeAttr.
+
+        :param env: Environment object.
+        :param id: ID of the object.
+        :param data: Optional initial data.
+        """
+        self.NUM_ZEROS_TO_RESET = 5
+        self.LAST_NONZERO = 0
+        self.NUM_ZERO_CURRENTLY = 0
+
+        super().__init__(env, id, data)
+
     def parse_message(self, data: dict):
         """
         Parse messages. This function is called by an internal function.
@@ -31,4 +45,17 @@ class SpongeAttr(attr.BaseAttr):
         """
         Get the average force magnitude on the sponge from the previous step. For code scalability purposes, is a list with one value.
         """
-        return self.data.get("real_time_force", [0.0]) 
+
+        # Code to put a few frames' buffer to stabilize reading.
+        reading = self.data.get("real_time_force", [0.0]) 
+
+        if reading[0] == 0.0:
+            self.NUM_ZERO_CURRENTLY += 1
+        else:
+            self.LAST_NONZERO = reading
+            self.NUM_ZERO_CURRENTLY = 0
+
+        if self.NUM_ZERO_CURRENTLY >= self.NUM_ZEROS_TO_RESET:
+            self.LAST_NONZERO = [0.0]
+
+        return self.LAST_NONZERO

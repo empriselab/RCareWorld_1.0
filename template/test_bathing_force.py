@@ -32,5 +32,4 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run RCareWorld bathing environment simulation.')
     parser.add_argument('-d', '--dev', action='store_true', help='Run in developer mode')
     args = parser.parse_args()
-    _main(use_graphics=args.dev)
-    _main()
+    _main(args.dev)
