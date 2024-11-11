@@ -3,6 +3,7 @@
 NOTE: run this file with pytest -s tests/test_bathing_env.py.
 """
 
+from pyrcareworld.attributes.camera_attr import CameraAttr
 from pyrcareworld.envs.bathing_env import BathingEnv
 
 import pytest
@@ -181,3 +182,15 @@ def test_joint_names(bathing_env: BathingEnv):
     assert "link_lift" in robot.data["names"]
 
     bathing_env.step()
+
+def test_instance_camera(bathing_env: BathingEnv):
+    new_cam: CameraAttr = bathing_env.InstanceObject(name="Camera", id=123456, attr_type=CameraAttr)
+    new_cam.SetTransform(position=[0, 1.7, 0], rotation=[90, 0, 0])
+
+    for _ in range(3):
+        new_cam.GetRGB(512, 512)
+        bathing_env.step()
+        rgb = np.frombuffer(new_cam.data["rgb"], dtype=np.uint8)
+        print(rgb.shape)
+        assert(rgb.shape[0] > 0)
+    
