@@ -183,7 +183,7 @@ def test_joint_names(bathing_env: BathingEnv):
 
     bathing_env.step()
 
-def test_instance_object(bathing_env: BathingEnv):
+def test_instance_camera(bathing_env: BathingEnv):
     new_cam: CameraAttr = bathing_env.InstanceObject(name="Camera", id=123456, attr_type=CameraAttr)
     new_cam.SetTransform(position=[0, 1.7, 0], rotation=[90, 0, 0])
 
@@ -194,4 +194,3 @@ def test_instance_object(bathing_env: BathingEnv):
         print(rgb.shape)
         assert(rgb.shape[0] > 0)
     
-    # TODO: Add tests for instancing other objects if needed.

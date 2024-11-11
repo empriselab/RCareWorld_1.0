@@ -8,6 +8,9 @@ import pyrcareworld.attributes as attr
 from pyrcareworld.side_channel import IncomingMessage, OutgoingMessage
 from pyrcareworld.utils.rfuniverse_communicator import RFUniverseCommunicator
 import os
+from typing import TypeVar, Type
+
+BaseAttrGeneric = TypeVar('BaseAttrGeneric', bound='attr.BaseAttr')
 
 
 class RCareWorld(ABC):
@@ -413,7 +416,7 @@ class RCareWorld(ABC):
         """
         self.listen_object.pop(type)
 
-    def InstanceObject(self, name: str, id: int = None, attr_type: type = attr.BaseAttr) -> attr.BaseAttr:
+    def InstanceObject(self, name: str, id: int = None, attr_type: Type[BaseAttrGeneric] = attr.BaseAttr) -> BaseAttrGeneric:
         """
         Instantiate an object.
 
