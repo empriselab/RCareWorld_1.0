@@ -413,7 +413,7 @@ class RCareWorld(ABC):
         """
         self.listen_object.pop(type)
 
-    def InstanceObject(self, name: str, id: int = None, attr_type: type = attr.BaseAttr):
+    def InstanceObject(self, name: str, id: int = None, attr_type: type = attr.BaseAttr) -> attr.BaseAttr:
         """
         Instantiate an object.
 
