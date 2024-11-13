@@ -15,7 +15,7 @@ from .test_angle_functions import euler_angles_allclose
 def _bathing_env_fixture():
     """Create a BathingEnv once and share it across tests."""
     # NOTE: set graphics = True here to debug.
-    env = BathingEnv(graphics=False)    
+    env = BathingEnv(graphics=False, log_level=1)    
     yield env
     env.close()
 
@@ -168,3 +168,16 @@ def test_target_angle_turn(bathing_env: BathingEnv):
     new_robot_base_rotation = robot.data["rotations"][0].copy()
     expected_robot_base_rotation = np.add(robot_base_rotation, (0, 40, 0))
     assert euler_angles_allclose(new_robot_base_rotation, expected_robot_base_rotation, atol=10.0)
+
+def test_joint_names(bathing_env: BathingEnv):
+    robot = bathing_env.get_robot()
+
+    bathing_env.step()
+
+    assert "base_link" in robot.data["names"]
+    assert "link_left_wheel" in robot.data["names"]
+    assert "link_right_wheel" in robot.data["names"]
+    assert "link_mast" in robot.data["names"]
+    assert "link_lift" in robot.data["names"]
+
+    bathing_env.step()
