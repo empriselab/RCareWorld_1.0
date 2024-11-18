@@ -15,7 +15,7 @@ class SpongeAttr(attr.BaseAttr):
         :param buffer: Number of frames to buffer. Increase if there are 0.0 values being put in between expected non-0 values, or generally, if your unity simulation frame rate is too low.
         """
         self.NUM_ZEROS_TO_RESET = buffer
-        self.LAST_NONZERO = 0
+        self.LAST_NONZERO = [0.0]
         self.NUM_ZERO_CURRENTLY = 0
 
         super().__init__(env, id, data)
