@@ -5,15 +5,16 @@ class SpongeAttr(attr.BaseAttr):
     Sponge attribute class to interact with the sponge in the Unity environment.
     """
 
-    def __init__(self, env, id: int, data: dict = {}):
+    def __init__(self, env, id: int, data: dict = {}, buffer: int = 5):
         """
         Initialize the SpongeAttr.
 
         :param env: Environment object.
         :param id: ID of the object.
         :param data: Optional initial data.
+        :param buffer: Number of frames to buffer. Increase if there are 0.0 values being put in between expected non-0 values, or generally, if your unity simulation frame rate is too low.
         """
-        self.NUM_ZEROS_TO_RESET = 5
+        self.NUM_ZEROS_TO_RESET = buffer
         self.LAST_NONZERO = 0
         self.NUM_ZERO_CURRENTLY = 0
 

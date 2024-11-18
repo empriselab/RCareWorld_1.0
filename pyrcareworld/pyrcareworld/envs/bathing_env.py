@@ -25,7 +25,7 @@ class BathingEnv(RCareWorld):
     _person_id: int = 573920
     _randomizer_id: int = 777
 
-    def __init__(self, executable_file=str(_DEFAULT_EXECUTABLE_PATH), seed:int=None,*args, **kwargs):
+    def __init__(self, executable_file=str(_DEFAULT_EXECUTABLE_PATH), seed: int=None,*args, **kwargs):
         super().__init__(executable_file=executable_file, *args, **kwargs)
 
         if seed is not None:
