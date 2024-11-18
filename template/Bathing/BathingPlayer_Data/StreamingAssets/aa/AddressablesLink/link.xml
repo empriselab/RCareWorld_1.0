@@ -31,6 +31,8 @@
     <type fullname="GelSlimAttr" preserve="all" />
     <type fullname="GelSlimCollider" preserve="all" />
     <type fullname="IgnoreSelfCollision" preserve="all" />
+    <type fullname="MimicJoint" preserve="all" />
+    <type fullname="MimicJointController" preserve="all" />
     <type fullname="RCareWorld.Attributes.CameraAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.ColliderAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.ControllerAttr" preserve="all" />

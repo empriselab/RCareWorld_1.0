@@ -193,4 +193,42 @@ def test_instance_camera(bathing_env: BathingEnv):
         rgb = np.frombuffer(new_cam.data["rgb"], dtype=np.uint8)
         print(rgb.shape)
         assert(rgb.shape[0] > 0)
+
+def test_sponge_force():
+    """
+    Test for the sponge force. Teleports the sponge to the right thigh and reads the force.
+    """
+    # Stable seed so that the test is consistent.
+    env = BathingEnv(graphics=False, seed=100)
+
+    sponge = env.get_sponge()
+    assert sponge.GetForce() == [0.0]
+
+    # Teleport sponge onto right thigh for testing.
+    sponge.SetPosition(position=[-0.108999997,0.91,0.05])
+
+    # Wait a bit.
+    env.step(30)
+
+    # Read collision output.
+    for i in range(20):
+        force = sponge.GetForce()
+        env.step()
+
+        assert force[0] > 0, f"On iteration {i}, force was {force} but should be > 0"
+
+    # Teleport away.
+    sponge.SetPosition(position=[-0.108999997,0.532999992,2.227])
+
+    # Wait a bit. Takes a little while for force to zero out.
+    for _ in range(40):
+        sponge.GetForce()
+        env.step()
+
+    # Read collision output.
+    for i in range(20):
+        force = sponge.GetForce()
+        env.step()
+
+        assert force[0] == 0.0, f"On iteration {i}, force was {force} but should be 0"
     
