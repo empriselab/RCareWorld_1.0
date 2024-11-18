@@ -208,14 +208,14 @@ def test_sponge_force():
     sponge.SetPosition(position=[-0.108999997,0.91,0.05])
 
     # Wait a bit.
-    env.step(5)
+    env.step(15)
 
     # Read collision output.
-    for _ in range(20):
+    for i in range(20):
         force = sponge.GetForce()
         env.step()
 
-        assert force[0] > 0
+        assert force[0] > 0, f"On iteration {i}, force was {force} but should be > 0"
 
     # Teleport away.
     sponge.SetPosition(position=[-0.108999997,0.532999992,2.227])
@@ -224,9 +224,9 @@ def test_sponge_force():
     env.step(15)
 
     # Read collision output.
-    for _ in range(20):
+    for i in range(20):
         force = sponge.GetForce()
         env.step()
 
-        assert force[0] == 0.0
+        assert force[0] == 0.0, f"On iteration {i}, force was {force} but should be 0"
     
