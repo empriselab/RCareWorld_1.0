@@ -13,13 +13,15 @@ def _main(dev):
     '''
     # Initialize the environment
     if dev:
-        env = BathingEnv(executable_file="@editor")
+        env = BathingEnv(executable_file="@editor", seed=100)
     else:
-        print("This script requires the Unity Editor / EmPRISE Lab internal version of RCareWorld to be installed; for regular users, this will not work. However, you can fowllow the code to see how to access the sponge's force values.")
+        print("This script requires the Unity Editor / EmPRISE Lab internal version of RCareWorld to be installed; for regular users, this will not work. However, you can follow the code to see how to access the sponge's force values.")
         exit(1)
     print(env.attrs)
 
     sponge = env.get_sponge()
+    # Teleport sponge onto right thigh for testing.
+    sponge.SetPosition(position=[-0.108999997,0.91,0.05])
 
     # Read collision output.
     for _ in range(9000):
