@@ -34,7 +34,7 @@ from pyrcareworld.demo import executable_path
 # Initialize the environment with the specified scene file
 player_path = os.path.join(executable_path, "../executable/Player/Player.x86_64")
 
-env = RCareWorld(assets=["franka_panda", "Collider_Box", "OmplManager"], executable_file="@editor")
+env = RCareWorld(assets=["franka_panda", "Collider_Box", "OmplManager"], executable_file=player_path)
 robot = env.InstanceObject(
     name="franka_panda", id=123456, attr_type=attr.ControllerAttr
 )
