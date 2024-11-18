@@ -45,6 +45,8 @@ class SpongeAttr(attr.BaseAttr):
     def GetForce(self) -> list:
         """
         Get the average force magnitude on the sponge from the previous step. For code scalability purposes, is a list with one value.
+
+        This function assumes it is being called continuously in a loop. If you just want a SINGULAR accurate reading (rather than a continuous stream of readings, every frame), it may be better to use `.data['forces']`.
         """
 
         # Code to put a few frames' buffer to stabilize reading.
