@@ -208,7 +208,7 @@ def test_sponge_force():
     sponge.SetPosition(position=[-0.108999997,0.91,0.05])
 
     # Wait a bit.
-    env.step(15)
+    env.step(30)
 
     # Read collision output.
     for i in range(20):
