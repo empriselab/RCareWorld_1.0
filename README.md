@@ -81,6 +81,20 @@ You can perform common Unity operations in this window:
 
 ![test_scene_py_img](./test_scene.png)
 
+
+## (Optional): OMPL Installation
+
+The Open Motion Planning Library (OMPL) is a flexible, open-source library designed for solving complex motion planning problems for robots and other autonomous systems using state-of-the-art planning algorithms. It is an optional function that will not affect your regular use if not installed.
+
+If you would like to install OMPL, and you've never installed it before, please run the following command:
+
+```
+python3 -m pip install https://github.com/ompl/ompl/releases/download/prerelease/ompl-1.6.0-cp310-cp310-manylinux_2_28_x86_64.whl
+```
+
+Otherwise, make sure you install the python bindings for your current OMPL version.
+
+If that command doesn't work for you, please go to the OMPL Releases page and find the corresponding python version you are using (the above is for python 3.10).
  
 # Get Started with the Examples
 Check the examples in the `pyrcareworld/pyrcareworld/demo/examples` folder. 

@@ -24,10 +24,11 @@ from pyrcareworld.attributes.dressing_score_attr import DressingScoreAttr
 from pyrcareworld.attributes.sponge_attr import SpongeAttr
 from pyrcareworld.attributes.sponge_score_attr import SpongeScoreAttr
 
+# THIS IS AN OPTIONAL FUNCTION, WON'T AFFECT YOUR USE
 try:
   from pyrcareworld.attributes.omplmanager_attr import OmplManagerAttr
 except ImportError:
-  print("Unable to import OmplManagerAttr. OMPL is likely not installed: skipping.")
+  print("""Unable to import OmplManagerAttr. OMPL is an optional function that likely will not affect your use.\nIf you haven't installed OMPL before and would like to use it, install it using:\n\tpython3 -m pip install https://github.com/ompl/ompl/releases/download/prerelease/ompl-1.6.0-cp310-cp310-manylinux_2_28_x86_64.whl\nOtherwise, make sure you install the python bindings.""")
 
 
 attrs = {
