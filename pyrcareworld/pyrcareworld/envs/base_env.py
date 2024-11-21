@@ -121,7 +121,7 @@ class RCareWorld(ABC):
     def _start_unity_env(self, executable_file: str, port: int) -> subprocess.Popen:
         arg = [executable_file]
         if not self.graphics:
-            arg.extend(["-nographics", "-batchmode"])
+            arg.extend(["-batchmode"])
         if self.log_level == 0:
             proc_out = subprocess.DEVNULL
         else:
