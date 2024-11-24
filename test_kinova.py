@@ -18,6 +18,8 @@ gc0 = env.GetAttr(70700)
 
 for i in range(10000):
     position = gc0.data["position"]
+    rotation = gc0.data["rotation"]
     env.step()
     kinova.IKTargetDoMove(position=position,duration=0,speed_based=False)
+    kinova.IKTargetDoRotate(rotation=rotation, duration=0, speed_based=False)
     env.step()
