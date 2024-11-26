@@ -34,10 +34,10 @@ else
 fi
 
 if [ -f /root/.config/unity3d/RCareWorld/DressingPlayer/dressingScore.json ]; then
-    echo "Contents of soapScore.json:"
+    echo "Contents of dressingScore.json:"
     cat /root/.config/unity3d/RCareWorld/DressingPlayer/dressingScore.json
 else
-    echo "soapScore.json file not found!"
+    echo "dressingScore.json file not found!"
 fi
 
 echo "All scripts have finished running."
