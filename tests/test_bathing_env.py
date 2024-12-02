@@ -232,3 +232,51 @@ def test_sponge_force():
 
         assert force[0] == 0.0, f"On iteration {i}, force was {force} but should be 0"
     
+def test_grasp_point_position(bathing_env: BathingEnv):
+    """
+    Test for the grasp point position and rotation being read correctly.
+    """
+    robot = bathing_env.get_robot()
+
+    start_pos1 = [0.5203691124916077, 0.25160324573516846, 1.360432744026184]
+    start_pos2 = [0.5636255145072937, 0.2514449656009674, 0.8926234245300293]
+    start_rot1 = [0.00018492204253561795, 90.03585052490234, 359.6820373535156]
+    start_rot2 = [359.94793701171875, 103.28073120117188, 357.9418640136719]
+
+    # A few preemptive calls just in case grasp point not initialized.
+    for _ in range(10):
+        robot.GetGraspPoint()
+        bathing_env.step()
+
+    for _ in range(10):
+        pos, rot = robot.GetGraspPoint(euler=True)
+        bathing_env.step()
+
+        assert np.allclose(pos, start_pos1, atol=0.1) or np.allclose(pos, start_pos2, atol=0.1)
+        assert euler_angles_allclose(rot, start_rot1, atol=5) or euler_angles_allclose(rot, start_rot2, atol=5)
+
+    position1 = (0.492, 0.644, 0.03)
+
+    robot.IKTargetDoMove(
+        position=[position1[0], position1[1] + 0.5, position1[2]],
+        duration=2,
+        speed_based=False,
+    )
+    robot.WaitDo()
+    robot.IKTargetDoMove(
+        position=[position1[0], position1[1], position1[2]],
+        duration=2,
+        speed_based=False,
+    )
+    robot.WaitDo()
+    robot.IKTargetDoKill()
+
+    bathing_env.step(5)
+
+    for _ in range(10):
+        pos, rot = robot.GetGraspPoint(euler=True)
+        bathing_env.step()
+
+        assert not (np.allclose(pos, start_pos1, atol=0.1) or np.allclose(pos, start_pos2, atol=0.1))
+        assert not (euler_angles_allclose(rot, start_rot1, atol=5) or euler_angles_allclose(rot, start_rot2, atol=5))
+    
