@@ -7,16 +7,13 @@ import argparse
 
 def _main(dev):
     '''
-    Runs the simulation to allow a developer to verify the sponge's force values from the Unity editor.
-
-    Note: This script requires the Unity Editor / EmPRISE Lab internal version of RCareWorld to be installed; for regular users, this will not work.
+    Runs the simulation  to verify the sponge's force values from the Unity executable or editor.
     '''
     # Initialize the environment
     if dev:
         env = BathingEnv(executable_file="@editor", seed=100)
     else:
-        print("This script requires the Unity Editor / EmPRISE Lab internal version of RCareWorld to be installed; for regular users, this will not work. However, you can follow the code to see how to access the sponge's force values.")
-        exit(1)
+        env = BathingEnv(seed=100)
     print(env.attrs)
 
     sponge = env.get_sponge()
@@ -31,7 +28,7 @@ def _main(dev):
         print(force)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Run RCareWorld bathing environment simulation.')
+    parser = argparse.ArgumentParser(description='Run RCareWorld bathing environment simulation for sponge forces.')
     parser.add_argument('-d', '--dev', action='store_true', help='Run in developer mode')
     args = parser.parse_args()
     _main(args.dev)
