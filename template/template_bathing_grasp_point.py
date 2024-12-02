@@ -17,6 +17,13 @@ def _main(dev):
     print(env.attrs)
 
     robot = env.get_robot()
+
+    for _ in range(10):
+        pos, rot = robot.GetGraspPoint(euler=True)
+        env.step()
+
+        print(pos, rot)
+        
     position1 = (0.492, 0.644, 0.03)
 
     robot.IKTargetDoMove(
