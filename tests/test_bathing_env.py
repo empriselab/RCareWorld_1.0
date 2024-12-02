@@ -277,6 +277,6 @@ def test_grasp_point_position(bathing_env: BathingEnv):
         pos, rot = robot.GetGraspPoint(euler=True)
         bathing_env.step()
 
-        assert not np.allclose(pos, start_pos1, atol=0.1) or np.allclose(pos, start_pos2, atol=0.1)
-        assert not euler_angles_allclose(rot, start_rot1, atol=5) or euler_angles_allclose(rot, start_rot2, atol=5)
+        assert not (np.allclose(pos, start_pos1, atol=0.1) or np.allclose(pos, start_pos2, atol=0.1))
+        assert not (euler_angles_allclose(rot, start_rot1, atol=5) or euler_angles_allclose(rot, start_rot2, atol=5))
     
