@@ -22,8 +22,13 @@ from pyrcareworld.attributes.cloth_grasper_attr import ClothGrasperAttr
 from pyrcareworld.attributes.bathing_score_attr import BathingScoreAttr
 from pyrcareworld.attributes.dressing_score_attr import DressingScoreAttr
 from pyrcareworld.attributes.sponge_attr import SpongeAttr
-# from pyrcareworld.attributes.omplmanager_attr import OMPLManagerAttr
 from pyrcareworld.attributes.sponge_score_attr import SpongeScoreAttr
+
+# THIS IS AN OPTIONAL FUNCTION, WON'T AFFECT YOUR USE
+try:
+  from pyrcareworld.attributes.omplmanager_attr import OmplManagerAttr
+except ImportError:
+  print("""Unable to import OmplManagerAttr. OMPL is an optional function that likely will not affect your use.""")
 
 
 attrs = {
@@ -50,5 +55,7 @@ attrs = {
 "DressingScoreAttr": DressingScoreAttr,
 "SpongeAttr": SpongeAttr,
 "PersonRandomizerAttr": PersonRandomizerAttr,
-# "OMPLManagerAttr": OMPLManagerAttr
 }
+
+if "OmplManagerAttr" in locals():
+  attrs["OmplManagerAttr"] = OmplManagerAttr

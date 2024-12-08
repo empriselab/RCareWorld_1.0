@@ -3,6 +3,7 @@
 NOTE: run this file with pytest -s tests/test_bathing_env.py.
 """
 
+from pyrcareworld.attributes.camera_attr import CameraAttr
 from pyrcareworld.envs.bathing_env import BathingEnv
 
 import pytest
@@ -181,3 +182,101 @@ def test_joint_names(bathing_env: BathingEnv):
     assert "link_lift" in robot.data["names"]
 
     bathing_env.step()
+
+def test_instance_camera(bathing_env: BathingEnv):
+    new_cam: CameraAttr = bathing_env.InstanceObject(name="Camera", id=123456, attr_type=CameraAttr)
+    new_cam.SetTransform(position=[0, 1.7, 0], rotation=[90, 0, 0])
+
+    for _ in range(3):
+        new_cam.GetRGB(512, 512)
+        bathing_env.step()
+        rgb = np.frombuffer(new_cam.data["rgb"], dtype=np.uint8)
+        print(rgb.shape)
+        assert(rgb.shape[0] > 0)
+
+def test_sponge_force():
+    """
+    Test for the sponge force. Teleports the sponge to the right thigh and reads the force.
+    """
+    # Stable seed so that the test is consistent.
+    env = BathingEnv(graphics=False, seed=100)
+
+    sponge = env.get_sponge()
+    assert sponge.GetForce() == [0.0]
+
+    # Teleport sponge onto right thigh for testing.
+    sponge.SetPosition(position=[-0.108999997,0.91,0.05])
+
+    # Wait a bit.
+    env.step(30)
+
+    # Read collision output.
+    for i in range(20):
+        force = sponge.GetForce()
+        env.step()
+
+        assert force[0] > 0, f"On iteration {i}, force was {force} but should be > 0"
+
+    # Teleport away.
+    sponge.SetPosition(position=[-0.108999997,0.532999992,2.227])
+
+    # Wait a bit. Takes a little while for force to zero out.
+    for _ in range(40):
+        sponge.GetForce()
+        env.step()
+
+    # Read collision output.
+    for i in range(20):
+        force = sponge.GetForce()
+        env.step()
+
+        assert force[0] == 0.0, f"On iteration {i}, force was {force} but should be 0"
+    
+def test_grasp_point_position(bathing_env: BathingEnv):
+    """
+    Test for the grasp point position and rotation being read correctly.
+    """
+    robot = bathing_env.get_robot()
+
+    start_pos1 = [0.5203691124916077, 0.25160324573516846, 1.360432744026184]
+    start_pos2 = [0.5636255145072937, 0.2514449656009674, 0.8926234245300293]
+    start_rot1 = [0.00018492204253561795, 90.03585052490234, 359.6820373535156]
+    start_rot2 = [359.94793701171875, 103.28073120117188, 357.9418640136719]
+
+    # A few preemptive calls just in case grasp point not initialized.
+    for _ in range(10):
+        robot.GetGraspPoint()
+        bathing_env.step()
+
+    for _ in range(10):
+        pos, rot = robot.GetGraspPoint(euler=True)
+        bathing_env.step()
+
+        assert np.allclose(pos, start_pos1, atol=0.1) or np.allclose(pos, start_pos2, atol=0.1)
+        assert euler_angles_allclose(rot, start_rot1, atol=5) or euler_angles_allclose(rot, start_rot2, atol=5)
+
+    position1 = (0.492, 0.644, 0.03)
+
+    robot.IKTargetDoMove(
+        position=[position1[0], position1[1] + 0.5, position1[2]],
+        duration=2,
+        speed_based=False,
+    )
+    robot.WaitDo()
+    robot.IKTargetDoMove(
+        position=[position1[0], position1[1], position1[2]],
+        duration=2,
+        speed_based=False,
+    )
+    robot.WaitDo()
+    robot.IKTargetDoKill()
+
+    bathing_env.step(5)
+
+    for _ in range(10):
+        pos, rot = robot.GetGraspPoint(euler=True)
+        bathing_env.step()
+
+        assert not (np.allclose(pos, start_pos1, atol=0.1) or np.allclose(pos, start_pos2, atol=0.1))
+        assert not (euler_angles_allclose(rot, start_rot1, atol=5) or euler_angles_allclose(rot, start_rot2, atol=5))
+    
