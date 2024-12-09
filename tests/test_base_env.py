@@ -69,9 +69,11 @@ def test_save_and_load():
   env.close()
 
 def test_object_listener():
-  env = RCareWorld(assets=["Collider_Box", "Rigidbody_Sphere"], executable_file="pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64")
+  env = RCareWorld(assets=["CustomAttr"], executable_file="pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64")
 
   called = False
+
+  custom = env.InstanceObject(name="CustomAttr", id=1, attr_type=attr.CustomAttr)
 
   def object_listener(args):
     nonlocal called
@@ -97,9 +99,19 @@ def test_object_listener():
   
   env.AddListenerObject("Collider_Box", object_listener)
 
+  env.SendObject(
+        "DynamicObject",
+        "string:", "this is dynamic object",
+        "int:", 1,
+        "bool:", True,
+        "float:", 4849.6564,
+        "list:", [616445.085, 9489984.0, 65419596.0, 9849849.0],
+        "dict:", {"1": 1, "2": 2, "3": 3},
+        "tuple:", ("1", 1, 0.562)
+    )
+
   # Get data back...
   env.step(10)
-
   assert called
 
   env.close()
