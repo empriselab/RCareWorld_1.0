@@ -533,7 +533,7 @@ class RCareWorld(ABC):
 
     def LoadMesh(self, path: str, id: int = None, collider_mode: str = "VHACD") -> attr.RigidbodyAttr:
         """
-        Load a model from a Mesh file.
+        Load a model from a Mesh file. Requires `libminizip1` to be installed.
 
         :param path: Str, the Mesh file path.
         :param id: Int, object id.
@@ -728,7 +728,7 @@ class RCareWorld(ABC):
 
     def LoadCloth(self, path: str, id: int = None) -> attr.ClothAttr:
         """
-        Load a mesh to Cloth.
+        Load a mesh to Cloth. Requires `libminizip1` to be installed.
 
         :param path: Str, the Mesh file path.
         :param id: Int, object id.
