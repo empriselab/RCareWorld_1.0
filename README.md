@@ -24,6 +24,7 @@ If you have an NVIDIA GPU, install an NVIDIA Driver from the official [NVIDIA Dr
 Install the necessary libraries:
 ```
 sudo apt-get update
+sudo apt-get install libminizip1
 sudo apt-get install libassimp-dev libopenblas-dev liblapack-dev
 ```
 
