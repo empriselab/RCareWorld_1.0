@@ -60,7 +60,7 @@ def test_save_bathing():
   assert os.path.exists("template/Bathing/BathingPlayer_Data/StreamingAssets/SceneData/helpme.json")
 
 def test_save_and_load():
-  player_path = "pyrcareworld/pyrcareworld/demo/examples/executable/Player/Player.x86_64"
+  player_path = "pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64"
 
   env = RCareWorld(assets=["Collider_Box", "Rigidbody_Sphere"], executable_file=player_path)
 
@@ -87,7 +87,7 @@ def test_save_and_load():
   for _ in range(10):
     env.step()
 
-  assert os.path.exists("pyrcareworld/pyrcareworld/demo/examples/executable/Player/Player_Data/StreamingAssets/SceneData/helpme.json")
+  assert os.path.exists("pyrcareworld/pyrcareworld/demo/executable/Player/Player_Data/StreamingAssets/SceneData/test_scene.json")
 
   env.ClearScene()
 
