@@ -74,6 +74,7 @@ def test_object_listener():
   called = False
 
   def object_listener(args):
+    nonlocal called
     called = True
     dict = {}
     for i, arg in enumerate(args):
