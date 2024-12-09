@@ -272,7 +272,7 @@ class RCareWorld(ABC):
         """
         self._send_env_data("Collect")
 
-    def GetAttr(self, id: int):
+    def GetAttr(self, id: int) -> attr.BaseAttr:
         """
         Get the attribute instance by object ID.
 
