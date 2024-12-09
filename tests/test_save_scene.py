@@ -62,7 +62,7 @@ def test_save_bathing():
 def test_save_and_load():
   player_path = "pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64"
 
-  env = RCareWorld(assets=["Collider_Box", "Rigidbody_Sphere"], executable_file=player_path)
+  env = RCareWorld(assets=["Collider_Box", "Rigidbody_Sphere"], executable_file=player_path, log_level=1)
 
   box1 = env.InstanceObject(name="Collider_Box", attr_type=attr.ColliderAttr, id=1)
   box1.SetTransform(position=[-0.5, 0.5, 0], scale=[0.1, 1, 1])
