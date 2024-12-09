@@ -664,6 +664,7 @@ class RCareWorld(ABC):
         Clear the current scene.
         """
         self._send_env_data("ClearScene")
+        self.attrs = {}
 
     def AlignCamera(self, camera_id: int) -> None:
         """
