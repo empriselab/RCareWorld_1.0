@@ -77,15 +77,15 @@ def test_save_and_load():
 
   env.SaveScene("test_scene.json")
 
+  # Give some time to save...
+  for _ in range(10):
+    env.step()
+
   assert env.GetAttr(1).data["name"] == "Collider_Box"
   assert env.GetAttr(2).data["name"] == "Collider_Box"
   assert env.GetAttr(3).data["name"] == "Collider_Box"
   assert env.GetAttr(4).data["name"] == "Collider_Box"
   assert env.GetAttr(5).data["name"] == "Rigidbody_Sphere"
-
-  # Give some time to save...
-  for _ in range(10):
-    env.step()
 
   assert os.path.exists("pyrcareworld/pyrcareworld/demo/executable/Player/Player_Data/StreamingAssets/SceneData/test_scene.json")
 
