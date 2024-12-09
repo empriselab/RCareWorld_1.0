@@ -69,7 +69,7 @@ def test_save_and_load():
   env.close()
 
 def test_object_listener():
-  env = RCareWorld(assets=["CustomAttr"], executable_file="pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64")
+  env = RCareWorld(assets=["CustomAttr"], executable_file="pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64", graphics=False)
 
   called = False
 
