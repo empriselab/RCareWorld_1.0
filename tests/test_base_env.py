@@ -7,6 +7,10 @@ from pyrcareworld.envs.dressing_env import DressingEnv
 import os
 import sys
 
+from pyrcareworld.demo import urdf_path
+from pyrcareworld.demo import executable_path
+from pyrcareworld.demo import mesh_path
+
 def test_save_and_load():
   player_path = "pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64"
 
@@ -116,5 +120,31 @@ def test_object_listener():
   assert called
 
   env.close()
+
+def test_load_objects():
+  env = RCareWorld(assets=["CustomAttr"], executable_file="pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64", graphics=False)
+
+  robot = env.LoadURDF(
+    path=os.path.join(urdf_path, "UR5/ur5_robot.urdf"),
+    native_ik=False,
+    id=1
+  )
+
+  mesh = env.LoadMesh(
+    path=os.path.join(mesh_path, "002_master_chef_can/google_16k/textured.obj",),
+    id=2
+  )
+
+  t_shirt_path = os.path.join(mesh_path, 'Tshirt.obj')
+  cloth = env.LoadCloth(path=t_shirt_path, id=3)
+
+  env.step(3)
+
+  assert env.GetAttr(1) == robot
+  assert env.GetAttr(2) == mesh
+  assert env.GetAttr(3) == cloth
+
+  env.close()
+
 
 # TODO: Test more functions of the environment
