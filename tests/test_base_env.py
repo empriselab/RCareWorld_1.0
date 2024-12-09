@@ -76,7 +76,7 @@ def test_object_listener():
   custom = env.InstanceObject(name="CustomAttr", id=1, attr_type=attr.CustomAttr)
 
   def object_listener(args):
-    nonlocal called
+    global called
     called = True
     dict = {}
     for i, arg in enumerate(args):
@@ -97,7 +97,7 @@ def test_object_listener():
     assert dict[12] == "tuple:"
     assert dict[13] == "('a', 1, 0.5619999766349792)"
   
-  env.AddListenerObject("Collider_Box", object_listener)
+  env.AddListenerObject("DynamicObject", object_listener)
 
   env.SendObject(
         "DynamicObject",
@@ -111,7 +111,9 @@ def test_object_listener():
     )
 
   # Get data back...
-  env.step(10)
+  for _ in range(10):
+    env.step()
+
   assert called
 
   env.close()
