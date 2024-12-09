@@ -122,7 +122,7 @@ def test_object_listener():
   env.close()
 
 def test_load_objects():
-  env = RCareWorld(assets=["CustomAttr"], executable_file="pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64", graphics=False)
+  env = RCareWorld(executable_file="pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64", graphics=False, log_level=1)
 
   robot = env.LoadURDF(
     path=os.path.join(urdf_path, "UR5/ur5_robot.urdf"),
