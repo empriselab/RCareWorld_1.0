@@ -46,7 +46,7 @@ def _main(dev):
     # Callback function to handle dynamic object messages
     def dynamic_object_callback(args):
         for i, arg in enumerate(args):
-            print(f"Arg {i}: {arg}")
+            print(f"Arg {i}: {arg}", type(arg))
 
     # Add a listener for dynamic object messages
     env.AddListenerObject("DynamicObject", dynamic_object_callback)

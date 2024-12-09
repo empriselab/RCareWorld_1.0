@@ -36,6 +36,7 @@
     <type fullname="RCareWorld.Attributes.CameraAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.ColliderAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.ControllerAttr" preserve="all" />
+    <type fullname="RCareWorld.Attributes.CustomAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.Digit.GelSlimTarget" preserve="all" />
     <type fullname="RCareWorld.Attributes.HumanArticulationAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.OmplManagerAttr" preserve="all" />
