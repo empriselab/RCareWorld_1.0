@@ -10,7 +10,7 @@ import sys
 def test_save_and_load():
   player_path = "pyrcareworld/pyrcareworld/demo/executable/Player/Player.x86_64"
 
-  env = RCareWorld(assets=["Collider_Box", "Rigidbody_Sphere"], executable_file=player_path, log_level=1, graphics=False)
+  env = RCareWorld(assets=["Collider_Box", "Rigidbody_Sphere"], executable_file=player_path, graphics=False)
 
   box1 = env.InstanceObject(name="Collider_Box", attr_type=attr.ColliderAttr, id=1)
   box1.SetTransform(position=[-0.5, 0.5, 0], scale=[0.1, 1, 1])
@@ -76,44 +76,43 @@ def test_object_listener():
   custom = env.InstanceObject(name="CustomAttr", id=1, attr_type=attr.CustomAttr)
 
   def object_listener(args):
-    global called
-    called = True
-    dict = {}
-    for i, arg in enumerate(args):
-      dict[i] = arg
+      nonlocal called
+      called = True
+      dict = {}
+      for i, arg in enumerate(args):
+          dict[i] = arg
+          print(i, arg, type(arg))
 
-    assert dict[0] == "string:"
-    assert dict[1] == "This is dynamic object"
-    assert dict[2] == "int:"
-    assert dict[3] == "123"
-    assert dict[4] == "float:"
-    assert dict[5] == "456.0"
-    assert dict[6] == "bool:"
-    assert dict[7] == "False"
-    assert dict[8] == "list:"
-    assert dict[9] == "[7.889999866485596, 1.1100000143051147]"
-    assert dict[10] == "dict:"
-    assert dict[11] == "{'a': 1, 'b': 2}"
-    assert dict[12] == "tuple:"
-    assert dict[13] == "('a', 1, 0.5619999766349792)"
+      assert dict[0] == "string:"
+      assert dict[1] == "This is dynamic object"
+      assert dict[2] == "int:"
+      assert dict[3] == 123
+      assert dict[4] == "float:"
+      assert dict[5] == float(456.0)
+      assert dict[6] == "bool:"
+      assert dict[7] == False
+      assert dict[8] == "list:"
+      assert str(dict[9]) == "[7.889999866485596, 1.1100000143051147]"
+      assert dict[10] == "dict:"
+      assert str(dict[11]) == "{'a': 1, 'b': 2}"
+      assert dict[12] == "tuple:"
+      assert str(dict[13]) == "('a', 1, 0.5619999766349792)"
   
   env.AddListenerObject("DynamicObject", object_listener)
 
   env.SendObject(
-        "DynamicObject",
-        "string:", "this is dynamic object",
-        "int:", 1,
-        "bool:", True,
-        "float:", 4849.6564,
-        "list:", [616445.085, 9489984.0, 65419596.0, 9849849.0],
-        "dict:", {"1": 1, "2": 2, "3": 3},
-        "tuple:", ("1", 1, 0.562)
-    )
+      "DynamicObject",
+      "string:", "this is dynamic object",
+      "int:", 1,
+      "bool:", True,
+      "float:", 4849.6564,
+      "list:", [616445.085, 9489984.0, 65419596.0, 9849849.0],
+      "dict:", {"1": 1, "2": 2, "3": 3},
+      "tuple:", ("1", 1, 0.562)
+  )
 
   # Get data back...
-  for _ in range(10):
-    env.step()
-
+  env.step(10)
   assert called
 
   env.close()
