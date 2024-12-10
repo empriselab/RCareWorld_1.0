@@ -272,7 +272,7 @@ class RCareWorld(ABC):
         """
         self._send_env_data("Collect")
 
-    def GetAttr(self, id: int):
+    def GetAttr(self, id: int) -> attr.BaseAttr:
         """
         Get the attribute instance by object ID.
 
@@ -533,7 +533,7 @@ class RCareWorld(ABC):
 
     def LoadMesh(self, path: str, id: int = None, collider_mode: str = "VHACD") -> attr.RigidbodyAttr:
         """
-        Load a model from a Mesh file.
+        Load a model from a Mesh file. Requires `libminizip1` to be installed.
 
         :param path: Str, the Mesh file path.
         :param id: Int, object id.
@@ -664,6 +664,7 @@ class RCareWorld(ABC):
         Clear the current scene.
         """
         self._send_env_data("ClearScene")
+        self.attrs = {}
 
     def AlignCamera(self, camera_id: int) -> None:
         """
@@ -727,7 +728,7 @@ class RCareWorld(ABC):
 
     def LoadCloth(self, path: str, id: int = None) -> attr.ClothAttr:
         """
-        Load a mesh to Cloth.
+        Load a mesh to Cloth. Requires `libminizip1` to be installed.
 
         :param path: Str, the Mesh file path.
         :param id: Int, object id.
