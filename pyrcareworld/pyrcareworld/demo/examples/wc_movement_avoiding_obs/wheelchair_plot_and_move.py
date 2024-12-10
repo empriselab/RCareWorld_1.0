@@ -105,7 +105,7 @@ class Wheelchair:
         '''
         return math.sqrt((d2[0] - d1[0])**2 + (d2[2] - d1[2])**2)
     
-    def rrt_path_plan(self, obs_list_ids):
+    def rrt_path_plan(self, obs_list_ids, xdim, x_goal, scale=1.7):
         '''
         plan the path given a list of obstacles
         '''
@@ -125,7 +125,6 @@ class Wheelchair:
                 scale_x = ob.data['local_to_world_matrix'][0][0]
                 pos_z = ob.data['local_to_world_matrix'][2][3]
                 scale_z = ob.data['local_to_world_matrix'][2][2]
-                scale = 1.7 #2 is the default with no breathing room
                 x_lower = pos_x-scale_x/scale
                 z_lower = pos_z-scale_z/scale
                 x_upper = pos_x+scale_x/scale
@@ -135,8 +134,7 @@ class Wheelchair:
 
         Obstacles = setup_obs(obstacles)
 
-        X_dimensions = np.array([(-5, 15), (-15, 5)]) # dimensions of Search Space [(x_lower, x_upper), (y_lower, y_upper), ...]
-        x_goal = (4.989, -3.839)  # goal location
+        X_dimensions = np.array(xdim) # dimensions of Search Space [(x_lower, x_upper), (y_lower, y_upper), ...]
 
         q = 1  # length of tree edges
         r = .1  # length of smallest edge to check for intersection with obstacles
@@ -167,7 +165,7 @@ class Wheelchair:
 
 wc = Wheelchair(70900,709005)
 env.step(10)
-reg_path = wc.rrt_path_plan([70600,70601])
+reg_path = wc.rrt_path_plan([70600,70601],[(-5, 15), (-15, 5)],(4.989, -3.839))
 env.step(10)
 wc.traveling_pts(reg_path)
 
