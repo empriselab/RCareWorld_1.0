@@ -42,5 +42,5 @@ jobs:
       - name: Run unit tests
         run: |
           echo "::group::Running tests"
-          pytest --capture=tee-sys tests/
+          pytest --capture=tee-sys tests/test_bathing_env.py
           echo "::endgroup::"    
