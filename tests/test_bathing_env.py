@@ -194,6 +194,45 @@ def test_instance_camera(bathing_env: BathingEnv):
         print(rgb.shape)
         assert(rgb.shape[0] > 0)
 
+def test_access_attrs(bathing_env: BathingEnv):
+    """
+    Test that all of the following can be gotten without error:
+    # _gripper_id: int = 2215820
+    # _robot_id: int = 221582
+    # _camera_id: int = 654321
+    # _sponge_id: int = 91846
+    # _bed_id: int = 758554
+    # _drawer_id: int = 758666
+    # _person_id: int = 573920
+    # _randomizer_id: int = 777
+    """
+
+    gripper = bathing_env.get_gripper()
+    robot = bathing_env.get_robot()
+    camera = bathing_env.get_camera()
+    sponge = bathing_env.get_sponge()
+    bed = bathing_env.GetAttr(758554)
+    drawer = bathing_env.GetAttr(758666)
+    person = bathing_env.GetAttr(573920)
+    person_randomizer = bathing_env.get_person_randomizer()
+
+    assert gripper
+    assert robot
+    assert camera
+    assert sponge
+    assert bed
+    assert drawer
+    assert person
+    assert person_randomizer
+
+    # Also test that the camera can be read from.
+    for _ in range(3):
+        camera.GetRGB(512, 512)
+        bathing_env.step()
+        rgb = np.frombuffer(camera.data["rgb"], dtype=np.uint8)
+        print(rgb.shape)
+        assert(rgb.shape[0] > 0)
+
 def test_sponge_force():
     """
     Test for the sponge force. Teleports the sponge to the right thigh and reads the force.
