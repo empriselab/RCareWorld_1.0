@@ -33,6 +33,7 @@
     <type fullname="IgnoreSelfCollision" preserve="all" />
     <type fullname="MimicJoint" preserve="all" />
     <type fullname="MimicJointController" preserve="all" />
+    <type fullname="RCareWorld.Attributes.CameraAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.ColliderAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.ControllerAttr" preserve="all" />
     <type fullname="RCareWorld.Attributes.Digit.GelSlimTarget" preserve="all" />
@@ -65,6 +66,9 @@
   <assembly fullname="Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="TMPro.TextMeshProUGUI" preserve="all" />
     <type fullname="TMPro.VertexGradient" preserve="nothing" serialized="true" />
+  </assembly>
+  <assembly fullname="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
+    <type fullname="UnityEngine.AudioListener" preserve="all" />
   </assembly>
   <assembly fullname="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null">
     <type fullname="UnityEngine.Camera" preserve="all" />
