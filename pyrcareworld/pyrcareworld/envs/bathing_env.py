@@ -24,13 +24,14 @@ class BathingEnv(RCareWorld):
     _drawer_id: int = 758666
     _person_id: int = 573920
     _randomizer_id: int = 777
-    print(self.attrs)
+    
 
     def __init__(self, executable_file=str(_DEFAULT_EXECUTABLE_PATH), seed: int=None,*args, **kwargs):
         super().__init__(executable_file=executable_file, *args, **kwargs)
 
         if seed is not None:
             self.get_person_randomizer().SetSeed(seed)
+        print(self.attrs)
 
     def get_robot(self) -> ControllerAttr:
         """Access the robot."""
