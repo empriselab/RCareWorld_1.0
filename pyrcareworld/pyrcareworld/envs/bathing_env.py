@@ -18,12 +18,13 @@ class BathingEnv(RCareWorld):
     # Environment-specific unity attribute IDs.
     _gripper_id: int = 2215820
     _robot_id: int = 221582
-    _camera_id: int = 123456
+    _camera_id: int = 654321
     _sponge_id: int = 91846
     _bed_id: int = 758554
     _drawer_id: int = 758666
     _person_id: int = 573920
     _randomizer_id: int = 777
+    print(self.attrs)
 
     def __init__(self, executable_file=str(_DEFAULT_EXECUTABLE_PATH), seed: int=None,*args, **kwargs):
         super().__init__(executable_file=executable_file, *args, **kwargs)
