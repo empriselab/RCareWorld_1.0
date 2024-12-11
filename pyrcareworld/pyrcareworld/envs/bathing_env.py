@@ -18,7 +18,7 @@ class BathingEnv(RCareWorld):
     # Environment-specific unity attribute IDs.
     _gripper_id: int = 2215820
     _robot_id: int = 221582
-    _camera_id: int = 654321
+    _camera_id: int = 123456
     _sponge_id: int = 91846
     _bed_id: int = 758554
     _drawer_id: int = 758666
