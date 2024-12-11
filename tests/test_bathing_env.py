@@ -225,6 +225,14 @@ def test_access_attrs(bathing_env: BathingEnv):
     assert person
     assert person_randomizer
 
+    # Also test that the camera can be read from.
+    for _ in range(3):
+        camera.GetRGB(512, 512)
+        bathing_env.step()
+        rgb = np.frombuffer(camera.data["rgb"], dtype=np.uint8)
+        print(rgb.shape)
+        assert(rgb.shape[0] > 0)
+
 def test_sponge_force():
     """
     Test for the sponge force. Teleports the sponge to the right thigh and reads the force.
