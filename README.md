@@ -123,7 +123,7 @@ Please ensure that your computer has sufficient memory, or close unnecessary run
 
 
 
-Your score will be stored in a JSON file called `spongeScore.json` for bathing and `dressingScore.json` for dressing under `~/.config/unity3d/RCareWorld/BathingPlayer/` for bathing and `~/.config/unity3d/RCareWorld/DressingPlayer/` for dressing.
+Your scores will be stored in two JSON files, called `spongeScore.json` for bathing and `dressingScore.json` for dressing both under `~/.config/unity3d/RCareWorld/DressingPlayer/`.
 
 # Submit to EvalAI
 Once you are done with your solutions, submit your code to EvalAI following [this](https://rcareworld.readthedocs.io/en/phy-robo-care/submission.html) tutorial. Remember, you need to sign up as a team on EvalAI before Sep 8 (11:59pm AoE) to participate.
